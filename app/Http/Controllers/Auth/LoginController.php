@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
   public function getForm()
   {
     $pageConfigs = ['myLayout' => 'blank'];
@@ -20,10 +21,10 @@ class LoginController extends Controller
     $credentials = $request->validated();
     if (Auth::attempt($credentials)) {
       $request->session()->regenerate();
-      return redirect()->intended(route('dashboard'));
+      return redirect()->intended(route('home'));
     }
     return to_route('auth.register')->withErrors([
-      'email'=> "Email invalide"
+      'email' => "Email invalide"
     ])->onlyInput('email');
   }
 }
